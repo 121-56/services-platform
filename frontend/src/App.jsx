@@ -1,34 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
+import Layout from './components/Layout';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-
-// صفحة بسيطة مؤقتة (سنستبدلها قريباً)
-const Home = () => {
-  const { user, logout } = useAuth();
-
-  return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          مرحباً {user?.name} 👋
-        </h1>
-        <p className="text-gray-600 mb-2">
-          البريد: {user?.email}
-        </p>
-        <p className="text-gray-600 mb-6">
-          الدور: {user?.role === 'provider' ? 'مقدم خدمة' : user?.role === 'admin' ? 'أدمن' : 'عميل'}
-        </p>
-        <button
-          onClick={logout}
-          className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold"
-        >
-          تسجيل الخروج
-        </button>
-      </div>
-    </div>
-  );
-};
 
 // صفحة محمية
 const ProtectedRoute = ({ children }) => {
@@ -45,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
   return user ? children : <Navigate to="/login" replace />;
 };
 
-// صفحة عامة (لا يدخلها المستخدم المسجل)
+// صفحة عامة
 const PublicRoute = ({ children }) => {
   const { user, loading } = useAuth();
 
@@ -83,7 +58,9 @@ function App() {
         path="/"
         element={
           <ProtectedRoute>
-            <Home />
+            <Layout>
+              <Home />
+            </Layout>
           </ProtectedRoute>
         }
       />
