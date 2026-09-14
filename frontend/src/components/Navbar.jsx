@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Home, LogOut, User, PlusCircle, List, Briefcase } from 'lucide-react';
+import { Home, LogOut, User, PlusCircle, List, Briefcase, Inbox } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -58,6 +58,16 @@ const Navbar = () => {
                   <List size={18} />
                   <span className="hidden md:inline">طلباتي</span>
                 </Link>
+
+                {user?.role === 'provider' && (
+  <Link
+    to="/incoming-orders"
+    className="flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition"
+  >
+    <Inbox size={18} />
+    <span className="hidden md:inline">الواردة</span>
+  </Link>
+)}
 
                 <div className="border-r border-gray-300 mx-2 h-8"></div>
 

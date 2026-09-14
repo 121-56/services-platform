@@ -8,6 +8,7 @@ import CreateService from './pages/CreateService';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MyOrders from './pages/MyOrders';
+import IncomingOrders from './pages/IncomingOrders';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -31,6 +32,7 @@ function App() {
       <Route path="/services/:id" element={<ProtectedRoute><Layout><ServiceDetails /></Layout></ProtectedRoute>} />
       <Route path="/create-service" element={<ProtectedRoute><Layout><CreateService /></Layout></ProtectedRoute>} />
       <Route path="/my-orders" element={<ProtectedRoute><Layout><MyOrders /></Layout></ProtectedRoute>} />
+     <Route path="/incoming-orders" element={<ProtectedRoute><Layout><IncomingOrders /></Layout></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
