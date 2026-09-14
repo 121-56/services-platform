@@ -15,6 +15,7 @@ app.use(cors({
     'http://localhost:5174',
     'https://services-platform.vercel.app',
     /\.vercel\.app$/,
+    /\.netlify\.app$/,
   ],
   credentials: true,
 }));
